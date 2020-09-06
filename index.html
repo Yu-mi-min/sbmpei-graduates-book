@@ -11,6 +11,7 @@
           integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
           crossorigin="anonymous"></script>
   <script src="Turn.js-4/turn.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
   <style>
       body {
@@ -72,8 +73,49 @@
       <button class="button is-light" onclick="prevPage()"><</button>
     </p>
     <p class="control" style="width: 5rem"><label>
-      <input id="current-page" class="input" type="text">
+      <input id="current-view" class="input" style="text-align: center;" type="text" readonly>
     </label></p>
+
+    <div class="dropdown control">
+      <div class="dropdown-trigger">
+        <button class="button" id="trig-dd-spec" aria-haspopup="true" aria-controls="dropdown-menu-spec">
+          <span>Специалист</span>
+          <span class="icon is-small"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
+        </button>
+      </div>
+
+      <div class="dropdown-menu" id="dropdown-menu-spec" role="menu">
+        <div class="dropdown-content">
+          <a href="#" class="dropdown-item">
+            1998
+          </a>
+          <a href="#" class="dropdown-item">
+            1999
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown control">
+      <div class="dropdown-trigger">
+        <button class="button" id="trig-dd-mast" aria-haspopup="true" aria-controls="dropdown-menu-mast">
+          <span>Магистр</span>
+          <span class="icon is-small"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
+        </button>
+      </div>
+
+      <div class="dropdown-menu" id="dropdown-menu-mast" role="menu">
+        <div class="dropdown-content">
+          <a href="#" class="dropdown-item">
+            1998
+          </a>
+          <a href="#" class="dropdown-item">
+            1999
+          </a>
+        </div>
+      </div>
+    </div>
+
     <p class="control">
       <button class="button is-light" onclick="nextPage()">></button>
     </p>
@@ -210,7 +252,14 @@
         height: 1000,
         shadow: true,
     })
-    book.bind('turning', (event, page, view) => $('#current-page').val(page));
+
+    book.bind('turning', (event, page, view) => {
+        let current = $('#current-view');
+        if (view[0] === 0 || view[1] === 0)
+            current.val(view[0] + view[1]);
+        else
+            current.val(`${view[0]} \u2013 ${view[1]}`);
+    });
 
     function prevPage() {
         book.turn('previous')
@@ -230,6 +279,17 @@
                 break
         }
     })
+
+    clickHandler = (trig) => trig.parent().parent().toggleClass('is-active');
+    focusHandler = (trig) => trig.parent().parent().removeClass('is-active');
+
+    let trigDDSpec = $('#trig-dd-spec');
+    trigDDSpec.click(() => clickHandler(trigDDSpec))
+    trigDDSpec.focusout(() => focusHandler(trigDDSpec))
+
+    let trigDDMast = $('#trig-dd-mast');
+    trigDDMast.click(() => clickHandler(trigDDMast))
+    trigDDMast.focusout(() => focusHandler(trigDDMast))
 
 </script>
 
