@@ -261,13 +261,9 @@
             current.val(`${view[0]} \u2013 ${view[1]}`);
     });
 
-    function prevPage() {
-        book.turn('previous')
-    }
-
-    function nextPage() {
-        book.turn('next')
-    }
+    prevPage = () => book.turn('previous');
+    nextPage = () => book.turn('next');
+    toPage = (page) => book.turn('page', page)
 
     $(document).keydown(e => {
         switch (e.keyCode) {
