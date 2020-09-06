@@ -1,0 +1,49 @@
+body {
+    overflow: hidden;
+}
+
+.nav-container {
+    padding: 1rem
+}
+
+#book {
+    background-color: white;
+}
+
+.first-page {
+    width: 100%;
+    height: 100%;
+}
+
+.first-page .page-content {
+    margin: 10rem 1rem;
+}
+
+.page {
+    background-color: #fffaf7;
+    background-image: url(logo.png);
+    background-size: 20rem;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.page-content {
+    margin: 3rem 0;
+    display: flex;
+    justify-content: center;
+
+}
+
+.page ul {
+    list-style-type: none;
+    text-align: left;
+    display: inline-block;
+}
+
+.page ul li {
+    margin: 0.1rem;
+}
+
+.page ul li.year {
+    color: #aa1515;
+}
