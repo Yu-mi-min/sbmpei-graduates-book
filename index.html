@@ -22,7 +22,7 @@
       }
 
       #book {
-          background-color: whitesmoke;
+          background-color: white;
       }
 
       .first-page {
@@ -32,7 +32,11 @@
       }
 
       .page {
-          background-color: white;
+          background-color: #fffaf7;
+          background-image: url(img/logo.png);
+          background-size: 20rem;
+          background-repeat: no-repeat;
+          background-position: center;
       }
 
       .page ul {
@@ -208,7 +212,10 @@
 <script type="text/javascript">
     let book = $('#book');
 
-    book.turn({height: 1000})
+    book.turn({
+        height: 1000,
+        shadow: true,
+    })
     book.bind('turning', (event, page, view) => $('#current-page').val(page));
 
     function prevPage() {
