@@ -1,5 +1,6 @@
 stages:
 - build
+- deploy
 
 build:
   stage: build
@@ -15,3 +16,13 @@ build:
     - if: $CI_COMMIT_BRANCH == 'master'
       when: on_success
     - when: manual
+
+deploy:
+  stage: deploy
+  script:
+    - rm -r $WEB_ROOT/*
+    - cp -r build/* $WEB_ROOT/
+  variables:
+    GIT_STRATEGY: none
+  tags:
+    - staging
