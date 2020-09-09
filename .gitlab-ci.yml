@@ -1,0 +1,28 @@
+stages:
+- build
+- deploy
+
+build:
+  stage: build
+  image: python:3
+  script:
+    - python -V
+    - ./build.sh -v
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 hr
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'master'
+      when: on_success
+    - when: manual
+
+deploy:
+  stage: deploy
+  script:
+    - rm -r $WEB_ROOT/*
+    - cp -r build/* $WEB_ROOT/
+  variables:
+    GIT_STRATEGY: none
+  tags:
+    - staging
