@@ -4,6 +4,8 @@ from graduates.utils import extract_year, extract_entries, split_to_pages
 ENTRIES_PER_PAGE = 35
 ENTRIES_MIN_BEFORE_END = 2
 
+PAGE_TITLE = 'Дипломы с отличием получили'
+
 TITLE = 'Дипломы с отличием получили'
 SUBTITLE = 'филиал ФГБОУ ВО «Национальный исследовательский университет «МЭИ» в г.&nbsp;Смоленске'
 
@@ -35,6 +37,6 @@ for page in split_to_pages(extract_entries(MAST_DIR), ENTRIES_PER_PAGE, ENTRIES_
         m_years.append(YearToPage(year, p_num))
     p_num += 1
 
-html = t.index.render(content=content, s_years=s_years, m_years=m_years)
+html = t.index.render(page_title=PAGE_TITLE, content=content, s_years=s_years, m_years=m_years)
 
 print(html)
