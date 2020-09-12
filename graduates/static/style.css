@@ -3,7 +3,9 @@ body {
 }
 
 .nav-container {
-    padding: 1rem
+    padding: 1rem;
+    position: relative;
+    z-index: 1000;
 }
 
 #book {
