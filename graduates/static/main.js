@@ -28,15 +28,14 @@ $(document).keydown(e => {
     }
 })
 
-/* todo: year's dd's
-clickHandler = (trig) => trig.parent().parent().toggleClass('is-active');
-focusHandler = (trig) => trig.parent().parent().removeClass('is-active');
+let ddSpec = $('#dd-spec')
+let ddMast = $('#dd-mast')
 
-let trigDDSpec = $('#trig-dd-spec');
-trigDDSpec.click(() => clickHandler(trigDDSpec))
-trigDDSpec.focusout(() => focusHandler(trigDDSpec))
+clickHandler = (dd) => dd.toggleClass('is-active');
+ddSpec.click(() => clickHandler(ddSpec))
+ddMast.click(() => clickHandler(ddMast))
 
-let trigDDMast = $('#trig-dd-mast');
-trigDDMast.click(() => clickHandler(trigDDMast))
-trigDDMast.focusout(() => focusHandler(trigDDMast))
- */
+$('.to-page').click(e => {
+    let page = e.target.getAttribute('to-page');
+    toPage(page);
+});

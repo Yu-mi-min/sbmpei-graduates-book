@@ -18,7 +18,6 @@
 </head>
 <body>
 
-<!-- todo: year's dd's
 <div class="container nav-container">
   <div class="field is-grouped has-addons has-addons-centered">
     <p class="control">
@@ -28,9 +27,9 @@
       <input id="current-view" class="input" style="text-align: center;" type="text" readonly>
     </label></p>
 
-    <div class="dropdown control">
+    <div id ="dd-spec" class="dropdown control">
       <div class="dropdown-trigger">
-        <button class="button" id="trig-dd-spec" aria-haspopup="true" aria-controls="dropdown-menu-spec">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-spec">
           <span>Специалист</span>
           <span class="icon is-small"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
         </button>
@@ -38,19 +37,19 @@
 
       <div class="dropdown-menu" id="dropdown-menu-spec" role="menu">
         <div class="dropdown-content">
-          <a href="#" class="dropdown-item">
-            1998
+          <a class="dropdown-item to-page" to-page="3">
+            1234 - 3
           </a>
-          <a href="#" class="dropdown-item">
-            1999
+          <a class="dropdown-item to-page" to-page="4">
+            1234 - 4
           </a>
         </div>
       </div>
     </div>
 
-    <div class="dropdown control">
+    <div id="dd-mast" class="dropdown control">
       <div class="dropdown-trigger">
-        <button class="button" id="trig-dd-mast" aria-haspopup="true" aria-controls="dropdown-menu-mast">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-mast">
           <span>Магистр</span>
           <span class="icon is-small"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
         </button>
@@ -58,11 +57,11 @@
 
       <div class="dropdown-menu" id="dropdown-menu-mast" role="menu">
         <div class="dropdown-content">
-          <a href="#" class="dropdown-item">
-            1998
+          <a class="dropdown-item to-page" to-page="1">
+            1234 - 1
           </a>
-          <a href="#" class="dropdown-item">
-            1999
+          <a class="dropdown-item to-page" to-page="2">
+            1234 - 2
           </a>
         </div>
       </div>
@@ -73,7 +72,6 @@
     </p>
   </div>
 </div>
--->
 
 <div class="container">
   <div class="content">
