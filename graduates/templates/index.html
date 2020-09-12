@@ -37,11 +37,9 @@
 
       <div class="dropdown-menu" id="dropdown-menu-spec" role="menu">
         <div class="dropdown-content">
-          {% for y in s_years %}
-            <a class="dropdown-item to-page" to-page="{{ y.page }}">
-              {{ y.year }}
-            </a>
-          {% endfor %}
+          {%- for y in s_years %}
+            <a class="dropdown-item to-page" to-page="{{ y.page }}">{{ y.year }}</a>
+          {%- endfor %}
         </div>
       </div>
     </div>
@@ -56,11 +54,9 @@
 
       <div class="dropdown-menu" id="dropdown-menu-mast" role="menu">
         <div class="dropdown-content">
-          {% for y in m_years %}
-            <a class="dropdown-item to-page" to-page="{{ y.page }}">
-              {{ y.year }}
-            </a>
-          {% endfor %}
+          {%- for y in m_years %}
+            <a class="dropdown-item to-page" to-page="{{ y.page }}">{{ y.year }}</a>
+          {%- endfor %}
         </div>
       </div>
     </div>
