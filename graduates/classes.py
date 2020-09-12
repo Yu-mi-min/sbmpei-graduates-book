@@ -1,6 +1,15 @@
 from jinja2 import Environment, PackageLoader
 
 
+class YearToPage:
+    def __init__(self, year, page):
+        self.year = year
+        self.page = page
+
+    def __repr__(self):
+        return '{}y {}p'.format(self.year, self.page)
+    
+
 class Entry:
     def __init__(self, val, num=0, is_year=False):
         self.is_year = is_year
