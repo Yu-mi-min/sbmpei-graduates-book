@@ -49,3 +49,8 @@ body {
 .page ul li.year {
     color: #aa1515;
 }
+
+.page ul li span {
+    float: left;
+    width: 1.6rem;
+}
