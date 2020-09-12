@@ -18,7 +18,6 @@
 </head>
 <body>
 
-<!-- todo: year's dd's
 <div class="container nav-container">
   <div class="field is-grouped has-addons has-addons-centered">
     <p class="control">
@@ -28,9 +27,9 @@
       <input id="current-view" class="input" style="text-align: center;" type="text" readonly>
     </label></p>
 
-    <div class="dropdown control">
+    <div id ="dd-spec" class="dropdown control">
       <div class="dropdown-trigger">
-        <button class="button" id="trig-dd-spec" aria-haspopup="true" aria-controls="dropdown-menu-spec">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-spec">
           <span>Специалист</span>
           <span class="icon is-small"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
         </button>
@@ -38,19 +37,18 @@
 
       <div class="dropdown-menu" id="dropdown-menu-spec" role="menu">
         <div class="dropdown-content">
-          <a href="#" class="dropdown-item">
-            1998
-          </a>
-          <a href="#" class="dropdown-item">
-            1999
-          </a>
+          {% for y in s_years %}
+            <a class="dropdown-item to-page" to-page="{{ y.page }}">
+              {{ y.year }}
+            </a>
+          {% endfor %}
         </div>
       </div>
     </div>
 
-    <div class="dropdown control">
+    <div id="dd-mast" class="dropdown control">
       <div class="dropdown-trigger">
-        <button class="button" id="trig-dd-mast" aria-haspopup="true" aria-controls="dropdown-menu-mast">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-mast">
           <span>Магистр</span>
           <span class="icon is-small"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
         </button>
@@ -58,12 +56,11 @@
 
       <div class="dropdown-menu" id="dropdown-menu-mast" role="menu">
         <div class="dropdown-content">
-          <a href="#" class="dropdown-item">
-            1998
-          </a>
-          <a href="#" class="dropdown-item">
-            1999
-          </a>
+          {% for y in m_years %}
+            <a class="dropdown-item to-page" to-page="{{ y.page }}">
+              {{ y.year }}
+            </a>
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -73,7 +70,6 @@
     </p>
   </div>
 </div>
--->
 
 <div class="container">
   <div class="content">
