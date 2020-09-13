@@ -35,7 +35,12 @@ clickHandler = (dd) => dd.toggleClass('is-active');
 ddSpec.click(() => clickHandler(ddSpec))
 ddMast.click(() => clickHandler(ddMast))
 
-$('.to-page').click(e => {
+$('.to-page').click(e => { // <a> in dropdown
+    e.stopPropagation()
     let page = e.target.getAttribute('to-page');
     toPage(page);
+
+    // todo: refactor this dirty hack
+    ddSpec.removeClass('is-active');
+    ddMast.removeClass('is-active');
 });
