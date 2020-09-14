@@ -33,7 +33,6 @@ body {
     padding: 3rem 0;
     display: flex;
     justify-content: center;
-
 }
 
 .page ul {
@@ -58,4 +57,8 @@ body {
 #dd-spec .dropdown-content {
     max-height: 40rem;
     overflow: auto;
+}
+
+.modal {
+    z-index: 1010;
 }

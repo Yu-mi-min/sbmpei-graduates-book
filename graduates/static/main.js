@@ -39,7 +39,6 @@ $(document).keydown(e => {
     }
 })
 
-
 clickHandler = (dd) => dd.toggleClass('is-active');
 ddSpec.click(() => clickHandler(ddSpec))
 ddMast.click(() => clickHandler(ddMast))
@@ -50,3 +49,15 @@ $('.to-page').click(e => { // <a> in dropdown
     toPage(page);
     hideDDContents();
 });
+
+let modalInfo = $('#modal-info');
+
+modalInfoOpen = () => {
+    modalInfo.addClass('is-active');
+    $('#dh').focus()
+
+}
+modalInfoClose = () => modalInfo.removeClass('is-active')
+
+modalInfo.children('.modal-background').click(() =>modalInfoClose());
+modalInfo.children('.modal-close').click(() => modalInfoClose());
