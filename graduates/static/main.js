@@ -26,14 +26,14 @@ hideDDContents = () => {
 }
 
 $(document).keydown(e => {
-    switch (e.keyCode) {
-        case 37:
+    switch (e.code) {
+        case 'ArrowLeft':
             prevPage()
             break
-        case 39:
+        case 'ArrowRight':
             nextPage()
             break
-        case 27:
+        case 'Escape':
             hideDDContents()
             break
     }
