@@ -3,22 +3,29 @@ let ddSpec = $('#dd-spec');
 let ddMast = $('#dd-mast');
 let ddLinks = $('.to-page');
 let modalInfo = $('#modal-info');
+let modalSmallScreen = $('#modal-small-screen');
 let currentView = $('#current-view');
+
+activate = (el) => el.addClass('is-active');
+deactivate = (el) => el.removeClass('is-active');
+toggle = (el) => el.toggleClass('is-active');
 
 prevPage = () => book.turn('previous');
 nextPage = () => book.turn('next');
 toPage = (page) => book.turn('page', page)
 
 hideDDContents = () => {
-    ddSpec.removeClass('is-active');
-    ddMast.removeClass('is-active');
+    deactivate(ddSpec);
+    deactivate(ddMast);
 }
-toggleDropdown = (dd) => dd.toggleClass('is-active');
 
-modalInfoOpen = () => modalInfo.addClass('is-active');
-modalInfoClose = () => modalInfo.removeClass('is-active');
+modalInfoOpen = () => activate(modalInfo);
+modalInfoClose = () => deactivate(modalInfo);
 
-hideLoader = () => setTimeout(() => $('#loader').removeClass('is-active'), 555);
+modalSmallScreenOpen = () => activate(modalSmallScreen);
+modalSmallScreenClose = () => deactivate(modalSmallScreen);
+
+hideLoader = () => setTimeout(() => deactivate($('#loader')), 555);
 
 book.turn({
     height: 1000,
@@ -48,8 +55,8 @@ $(document).keydown(e => {
     }
 })
 
-ddSpec.click(() => toggleDropdown(ddSpec))
-ddMast.click(() => toggleDropdown(ddMast))
+ddSpec.click(() => toggle(ddSpec))
+ddMast.click(() => toggle(ddMast))
 
 ddLinks.click(e => {
     e.stopPropagation();
@@ -60,5 +67,9 @@ ddLinks.click(e => {
 
 modalInfo.children('.modal-background').click(() => modalInfoClose());
 modalInfo.children('.modal-close').click(() => modalInfoClose());
+
+if ($(window).width() < 1000) {
+    modalSmallScreenOpen();
+}
 
 hideLoader();
