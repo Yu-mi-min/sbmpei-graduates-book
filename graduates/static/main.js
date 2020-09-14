@@ -61,3 +61,5 @@ modalInfoClose = () => modalInfo.removeClass('is-active')
 
 modalInfo.children('.modal-background').click(() =>modalInfoClose());
 modalInfo.children('.modal-close').click(() => modalInfoClose());
+
+setTimeout(() => $('#loader').removeClass('is-active'), 555);
