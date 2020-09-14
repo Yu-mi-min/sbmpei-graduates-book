@@ -17,6 +17,14 @@ prevPage = () => book.turn('previous');
 nextPage = () => book.turn('next');
 toPage = (page) => book.turn('page', page)
 
+let ddSpec = $('#dd-spec')
+let ddMast = $('#dd-mast')
+
+hideDDContents = () => {
+    ddSpec.removeClass('is-active');
+    ddMast.removeClass('is-active');
+}
+
 $(document).keydown(e => {
     switch (e.keyCode) {
         case 37:
@@ -25,11 +33,12 @@ $(document).keydown(e => {
         case 39:
             nextPage()
             break
+        case 27:
+            hideDDContents()
+            break
     }
 })
 
-let ddSpec = $('#dd-spec')
-let ddMast = $('#dd-mast')
 
 clickHandler = (dd) => dd.toggleClass('is-active');
 ddSpec.click(() => clickHandler(ddSpec))
@@ -39,8 +48,5 @@ $('.to-page').click(e => { // <a> in dropdown
     e.stopPropagation()
     let page = e.target.getAttribute('to-page');
     toPage(page);
-
-    // todo: refactor this dirty hack
-    ddSpec.removeClass('is-active');
-    ddMast.removeClass('is-active');
+    hideDDContents();
 });
