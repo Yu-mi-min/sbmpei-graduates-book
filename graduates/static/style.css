@@ -54,3 +54,8 @@ body {
     float: left;
     width: 1.6rem;
 }
+
+#dd-spec .dropdown-content {
+    max-height: 40rem;
+    overflow: auto;
+}
