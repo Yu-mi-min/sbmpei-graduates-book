@@ -141,12 +141,15 @@ else
   info "build dir created"
 fi
 
-header "Generate index.html"
+header "Generate index.html and names_mapping.json"
 
 if python build.py > build/index.html; then
   info "index.html generated in build directory"
+  info "names_mapping.json generated in root directory"
+  info "move names_mapping.json to build directory"
+  mv names_mapping.json build/
 else
-  error "failed to generate index.html"
+  error "failed to generate index.html and/or names_mapping.json"
   exit 1
 fi
 
