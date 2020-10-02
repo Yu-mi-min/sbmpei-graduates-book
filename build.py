@@ -22,7 +22,7 @@ s_years = []
 m_years = []
 
 # used for search
-entries_to_page = dict()
+search_data = list()
 
 p_num = 2
 
@@ -30,10 +30,16 @@ p_num = 2
 for page in split_to_pages(extract_entries(SPEC_DIR), ENTRIES_PER_PAGE, ENTRIES_MIN_BEFORE_END):
     content += t.page.render(entries=page)
 
-    # entries to page
-    entries_to_page[p_num] = []
+    # search data
     for entry in [entry for entry in page if not entry.is_year]:
-        entries_to_page[p_num].append(entry)
+        (last_name, first_name, middle_name) = entry.val.split()[:3]
+        search_data.append([
+           last_name,
+           first_name,
+           middle_name,
+           entry.year,
+           p_num
+       ])
 
     # years to page
     for year in [entry.val for entry in page if entry.is_year]:
@@ -49,10 +55,15 @@ for page in split_to_pages(extract_entries(MAST_DIR), ENTRIES_PER_PAGE, ENTRIES_
     content += t.page.render(entries=page)
 
     # entries to page
-    entries_to_page[p_num] = []
     for entry in [entry for entry in page if not entry.is_year]:
-        entries_to_page[p_num].append(entry)
-
+        (last_name, first_name, middle_name) = entry.val.split()[:3]
+        search_data.append([
+           last_name,
+           first_name,
+           middle_name,
+           entry.year,
+           p_num
+       ])
     # years to page
     for year in [entry.val for entry in page if entry.is_year]:
         m_years.append(YearToPage(year, p_num))
@@ -64,5 +75,5 @@ html = t.index.render(page_title=PAGE_TITLE, content=content, s_years=s_years, m
 print(html)  # todo: save html directly in folder
 
 with open('names_mapping.json', 'w', encoding='utf8') as f:
-    generate_names_mapping(entries_to_page, f)
+    generate_names_mapping(search_data, f)
 

@@ -47,22 +47,5 @@ def split_to_pages(entries, entries_per_page, entries_min_before_end, pages=None
     return pages
 
 
-def _to_json(entry):
-    if not isinstance(entry, Entry):
-        return json.dumps(entry)
-
-    if entry.is_year:
-        raise Exception('not applicable for year entries')
-
-    (last_name, first_name, middle_name) = entry.val.split()[:3]
-
-    return [
-        last_name,
-        first_name,
-        middle_name,
-        entry.year
-    ]
-
-
 def generate_names_mapping(entries_to_page, json_file):
-    json.dump(entries_to_page, json_file, default=_to_json, ensure_ascii=False)
+    json.dump(entries_to_page, json_file, ensure_ascii=False)
