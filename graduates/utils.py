@@ -1,5 +1,6 @@
 import re
 import os
+import json
 
 from .classes import Entry
 
@@ -13,10 +14,11 @@ def extract_entries(directory, entries=None):
         entries = []
 
     for file in [open(directory + '/' + f, 'r') for f in sorted(os.listdir(directory))]:
-        entries.append(Entry(extract_year(file.name), is_year=True))
+        year = extract_year(file.name)
+        entries.append(Entry(year, is_year=True))
         num = 1
         for line in file:
-            entries.append(Entry(line.strip(), num=num))
+            entries.append(Entry(line.strip(), num=num, year=year))
             num += 1
 
     return entries
@@ -43,3 +45,7 @@ def split_to_pages(entries, entries_per_page, entries_min_before_end, pages=None
             cnt = 0
 
     return pages
+
+
+def generate_names_mapping(entries_to_page, json_file):
+    json.dump(entries_to_page, json_file, ensure_ascii=False)

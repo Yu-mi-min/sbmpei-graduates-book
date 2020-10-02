@@ -1,3 +1,4 @@
+import json
 from jinja2 import Environment, PackageLoader
 
 
@@ -8,13 +9,14 @@ class YearToPage:
 
     def __repr__(self):
         return '{}y {}p'.format(self.year, self.page)
-    
+
 
 class Entry:
-    def __init__(self, val, num=0, is_year=False):
+    def __init__(self, val, num=0, year=None, is_year=False):
         self.is_year = is_year
         self.val = val
         self.num = num
+        self.year = year
 
     def __str__(self):
         return str(self.val)
@@ -23,7 +25,7 @@ class Entry:
         if self.is_year:
             return str(self.val)
         else:
-            return '{} {}'.format(self.num, self.val)
+            return '{} {} ({})'.format(self.num, self.val, self.year)
 
 
 class Templates:
