@@ -22,7 +22,7 @@ body {
 }
 
 .page {
-    background-color: #fffaf7;
+    background-color: #fff2e7;
     background-image: url(logo.png);
     background-size: 20rem;
     background-repeat: no-repeat;
@@ -87,4 +87,8 @@ body {
 .loader-wrapper .loader {
     height: 5rem;
     width: 5rem;
+}
+
+.box {
+    box-shadow: 0 0.5em 1.2em -0.125em rgba(10,10,10,.6);
 }
