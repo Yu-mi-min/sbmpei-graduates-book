@@ -124,7 +124,7 @@ searchInput.on('input', () => {
 
     if (query.replaceAll(/[^А-Яа-я]/g, '').length > 2) {
         activate(ddSearch);
-        console.log('process search. query: ' + query);
+        console.log('process query: ' + query);
         let searchResult = search(query, searchData);
 
         if (searchResult.length > 0) {
@@ -144,10 +144,6 @@ $(document).ready(() => {
     hideLoader();
 
     // json: [[fn, ln, md, year, page], ... ]
-    $.getJSON('names_mapping.json', null, (data) => {
-            searchData = data;
-            console.log(data);
-        })
-        .done(() => console.log( "names mapping json load successful" ))
+    $.getJSON('names_mapping.json', null, (data) => searchData = data)
         .fail(() => console.log( "names mapping json load fail" ));
 })
