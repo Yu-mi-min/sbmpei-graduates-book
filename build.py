@@ -72,6 +72,9 @@ for page in split_to_pages(extract_entries(MAST_DIR), ENTRIES_PER_PAGE, ENTRIES_
 
     p_num += 1
 
+if p_num % 2 == 1:
+    content += t.page.render(entries=[], page_class=get_page_class(p_num))
+
 info = dict()
 info['short_sha'] = os.getenv('CI_COMMIT_SHORT_SHA', '')
 
