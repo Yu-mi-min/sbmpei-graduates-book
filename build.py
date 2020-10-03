@@ -1,3 +1,5 @@
+import os
+
 from graduates.classes import Templates, YearToPage
 from graduates.utils import extract_entries, split_to_pages, generate_names_mapping
 
@@ -70,7 +72,10 @@ for page in split_to_pages(extract_entries(MAST_DIR), ENTRIES_PER_PAGE, ENTRIES_
 
     p_num += 1
 
-html = t.index.render(page_title=PAGE_TITLE, content=content, s_years=s_years, m_years=m_years)
+info = dict()
+info['short_sha'] = os.getenv('CI_COMMIT_SHORT_SHA', '')
+
+html = t.index.render(page_title=PAGE_TITLE, content=content, s_years=s_years, m_years=m_years, info=info)
 
 print(html)  # todo: save html directly in folder
 
