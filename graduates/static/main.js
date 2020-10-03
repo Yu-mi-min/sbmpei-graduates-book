@@ -127,7 +127,7 @@ searchInput.on('input', () => {
     let query = searchInput.val();
     clearSearchContent();
 
-    if (query.replaceAll(/[^А-Яа-я]/g, '').length > 2) {
+    if (query.replace(/[^А-Яа-я]/g, '').length > 2) {
         activate(ddSearch);
         console.log('process query: ' + query);
         let searchResult = search(query, searchData);
