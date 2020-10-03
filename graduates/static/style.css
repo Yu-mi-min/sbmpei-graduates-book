@@ -10,6 +10,7 @@ body {
 
 #book {
     background-color: white;
+    box-shadow: 0 0.5em 1.2em -0.125em rgba(10,10,10,.6);
 }
 
 .first-page {
@@ -91,4 +92,12 @@ body {
 
 .box {
     box-shadow: 0 0.5em 1.2em -0.125em rgba(10,10,10,.6);
+}
+
+.odd-page {
+    background: linear-gradient(90deg, #746b65 0%, #998f88 0.5%, #e5dad0, #fff2e7 4%);
+}
+
+.even-page {
+    background: linear-gradient(90deg, #fff2e7 96%, #e5dad0, #998f88 100%);
 }

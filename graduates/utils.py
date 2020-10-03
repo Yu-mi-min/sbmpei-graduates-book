@@ -49,3 +49,7 @@ def split_to_pages(entries, entries_per_page, entries_min_before_end, pages=None
 
 def generate_names_mapping(entries_to_page, json_file):
     json.dump(entries_to_page, json_file, ensure_ascii=False)
+
+
+def get_page_class(p_num):
+    return "odd-page" if p_num % 2 != 0 else "even-page"

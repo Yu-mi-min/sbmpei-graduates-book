@@ -1,7 +1,7 @@
 import os
 
 from graduates.classes import Templates, YearToPage
-from graduates.utils import extract_entries, split_to_pages, generate_names_mapping
+from graduates.utils import extract_entries, split_to_pages, generate_names_mapping, get_page_class
 
 ENTRIES_PER_PAGE = 35
 ENTRIES_MIN_BEFORE_END = 2
@@ -30,7 +30,7 @@ p_num = 2
 
 # todo: DRY#process_pages
 for page in split_to_pages(extract_entries(SPEC_DIR), ENTRIES_PER_PAGE, ENTRIES_MIN_BEFORE_END):
-    content += t.page.render(entries=page)
+    content += t.page.render(entries=page, page_class=get_page_class(p_num))
 
     # search data
     for entry in [entry for entry in page if not entry.is_year]:
@@ -49,12 +49,12 @@ for page in split_to_pages(extract_entries(SPEC_DIR), ENTRIES_PER_PAGE, ENTRIES_
 
     p_num += 1
 
-content += t.sep.render(title='МАГИСТРЫ')
+content += t.sep.render(title='МАГИСТРЫ', page_class=get_page_class(p_num))
 p_num += 1
 
 # todo: DRY#process_pages
 for page in split_to_pages(extract_entries(MAST_DIR), ENTRIES_PER_PAGE, ENTRIES_MIN_BEFORE_END):
-    content += t.page.render(entries=page)
+    content += t.page.render(entries=page, page_class=get_page_class(p_num))
 
     # entries to page
     for entry in [entry for entry in page if not entry.is_year]:
