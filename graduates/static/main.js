@@ -20,8 +20,9 @@ hideDDContents = () => {
     deactivate(ddSpec);
     deactivate(ddMast);
     deactivate(ddSearch);
-    searchInput.val('');
 }
+
+clearSearchInput = () => searchInput.val('');
 
 modalInfoOpen = () => activate(modalInfo);
 modalInfoClose = () => deactivate(modalInfo);
@@ -67,13 +68,14 @@ book.bind('turning', (event, page, view) => {
 $(document).keydown(e => {
     switch (e.code) {
         case 'ArrowLeft':
-            prevPage()
+            prevPage();
             break
         case 'ArrowRight':
-            nextPage()
+            nextPage();
             break
         case 'Escape':
-            hideDDContents()
+            hideDDContents();
+            clearSearchInput();
             break
     }
 })
@@ -86,6 +88,7 @@ ddLinks.click(e => {
     let page = e.target.getAttribute('to-page');
     toPage(page);
     hideDDContents();
+    clearSearchInput();
 });
 
 modalInfo.children('.modal-background').click(() => modalInfoClose());
@@ -113,12 +116,14 @@ updateSearchLinksEvents = () => {
             let page = e.target.getAttribute('to-page');
             toPage(page);
             hideDDContents();
+            clearSearchInput();
         });
 }
 
 let searchData;
 
 searchInput.on('input', () => {
+    hideDDContents();
     let query = searchInput.val();
     clearSearchContent();
 
