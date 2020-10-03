@@ -138,7 +138,8 @@ searchInput.on('input', () => {
     }
 })
 
-searchInput.click(() => searchInput.trigger('input'))
+searchInput.click(() => searchInput.trigger('input'));
+searchInput.keydown(e => e.stopPropagation());
 
 $(document).ready(() => {
     hideLoader();
