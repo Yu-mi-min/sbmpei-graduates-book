@@ -103,6 +103,7 @@ let ddSearchContent = ddSearch
     .children('.dropdown-content');
 
 
+
 createSearchEntry = (y, n, p) => $(`<a class="dropdown-item to-page" to-page="${p}">${n} (${y})</a>`).appendTo(ddSearchContent);
 clearSearchContent = () => ddSearchContent.empty();
 
@@ -144,7 +145,7 @@ searchInput.on('input', () => {
 })
 
 searchInput.click(() => searchInput.trigger('input'));
-searchInput.keydown(e => e.stopPropagation());
+searchInput.keydown(e => { (e.code !== 'Escape') && e.stopPropagation() });
 
 $(document).ready(() => {
     hideLoader();
