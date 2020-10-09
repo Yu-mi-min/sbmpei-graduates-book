@@ -54,11 +54,17 @@ search = (query, searchData) => {
 book.turn({
     height: 1000,
     shadow: true,
+    page: 2,
 });
 
-currentView.val(1)
+currentView.val(1) // was hidden in html
 
 book.bind('turning', (event, page, view) => {
+
+    // should work, but it doesn't.
+    // check was added directly to turn.js lib (turn.js line 939)
+    // if (page === 1) { event.preventDefault(); }
+
     if (view[0] === 0 || view[1] === 0)
         currentView.val(view[0] + view[1]);
     else

@@ -935,7 +935,8 @@ turnMethods = {
 
 		var data = this.data();
 
-		if (page>0 && page<=data.totalPages) {
+		// don't allow to user to turn to the first page
+		if (page>1 && page<=data.totalPages) {
 			if (!data.done || $.inArray(page, this.turn('view'))!=-1)
 				turnMethods._fitPage.call(this, page);
 			else
