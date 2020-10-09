@@ -16,8 +16,18 @@ MAST_DIR = 'graduates/text/masters'
 
 t = Templates()
 
+p_num = 1
+
 content = ''
+
+content += t.first.render(page_class=get_page_class(p_num))
+p_num += 1
+
+content += t.first.render(page_class=get_page_class(p_num))
+p_num += 1
+
 content += t.front.render(title=TITLE, subtitle=SUBTITLE)
+p_num += 1
 
 # used for year to page mapping
 s_years = []
@@ -25,8 +35,6 @@ m_years = []
 
 # used for search
 search_data = list()
-
-p_num = 2
 
 # todo: DRY#process_pages
 for page in split_to_pages(extract_entries(SPEC_DIR), ENTRIES_PER_PAGE, ENTRIES_MIN_BEFORE_END):
