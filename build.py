@@ -1,7 +1,7 @@
 import os
 
-from graduates.classes import Templates, YearToPage
-from graduates.utils import extract_entries, split_to_pages, generate_names_mapping, get_page_class
+from graduates.classes import Templates, YearToPage, Content
+from graduates.utils import extract_entries, split_to_pages, generate_names_mapping, get_page_class, process_pages
 
 ENTRIES_PER_PAGE = 35
 ENTRIES_MIN_BEFORE_END = 2
@@ -18,15 +18,15 @@ t = Templates()
 
 p_num = 1
 
-content = ''
+content = Content()
 
-content += t.first.render(page_class=get_page_class(p_num))
+content.append(t.first.render(page_class=get_page_class(p_num)))
 p_num += 1
 
-content += t.first.render(page_class=get_page_class(p_num))
+content.append(t.first.render(page_class=get_page_class(p_num)))
 p_num += 1
 
-content += t.front.render(title=TITLE, subtitle=SUBTITLE, page_class=get_page_class(p_num))
+content.append(t.front.render(title=TITLE, subtitle=SUBTITLE, page_class=get_page_class(p_num)))
 p_num += 1
 
 # used for year to page mapping
@@ -36,61 +36,27 @@ m_years = []
 # used for search
 search_data = list()
 
-# todo: DRY#process_pages
-for page in split_to_pages(extract_entries(SPEC_DIR), ENTRIES_PER_PAGE, ENTRIES_MIN_BEFORE_END):
-    content += t.page.render(entries=page, page_class=get_page_class(p_num))
+# parse all entries
+s_pages = split_to_pages(extract_entries(SPEC_DIR), ENTRIES_PER_PAGE, ENTRIES_MIN_BEFORE_END)
+m_pages = split_to_pages(extract_entries(MAST_DIR), ENTRIES_PER_PAGE, ENTRIES_MIN_BEFORE_END)
 
-    # search data
-    for entry in [entry for entry in page if not entry.is_year]:
-        (last_name, first_name, middle_name) = entry.val.split()[:3]
-        search_data.append([
-           last_name,
-           first_name,
-           middle_name,
-           entry.year,
-           p_num
-       ])
+p_num = process_pages(s_pages, content.append, search_data, s_years, p_num, t)
 
-    # years to page
-    for year in [entry.val for entry in page if entry.is_year]:
-        s_years.append(YearToPage(year, p_num))
-
-    p_num += 1
-
-content += t.sep.render(title='МАГИСТРЫ', page_class=get_page_class(p_num))
+content.append(t.sep.render(title='МАГИСТРЫ', page_class=get_page_class(p_num)))
 p_num += 1
 
-# todo: DRY#process_pages
-for page in split_to_pages(extract_entries(MAST_DIR), ENTRIES_PER_PAGE, ENTRIES_MIN_BEFORE_END):
-    content += t.page.render(entries=page, page_class=get_page_class(p_num))
-
-    # entries to page
-    for entry in [entry for entry in page if not entry.is_year]:
-        (last_name, first_name, middle_name) = entry.val.split()[:3]
-        search_data.append([
-           last_name,
-           first_name,
-           middle_name,
-           entry.year,
-           p_num
-       ])
-    # years to page
-    for year in [entry.val for entry in page if entry.is_year]:
-        m_years.append(YearToPage(year, p_num))
-
-    p_num += 1
+p_num = process_pages(m_pages, content.append, search_data, m_years, p_num, t)
 
 if p_num % 2 == 1:
-    content += t.page.render(entries=[], page_class=get_page_class(p_num))
+    content.append(t.page.render(entries=[], page_class=get_page_class(p_num)))
 
 info = dict()
 info['short_sha'] = os.getenv('CI_COMMIT_SHORT_SHA', '')
 
-html = t.index.render(page_title=PAGE_TITLE, content=content, s_years=s_years, m_years=m_years, info=info)
+html = t.index.render(page_title=PAGE_TITLE, content=str(content), s_years=s_years, m_years=m_years, info=info)
 
 with open('index.html', 'w', encoding='utf8') as f:
     f.write(html)
 
 with open('names_mapping.json', 'w', encoding='utf8') as f:
     generate_names_mapping(search_data, f)
-

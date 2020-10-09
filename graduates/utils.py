@@ -2,7 +2,7 @@ import re
 import os
 import json
 
-from .classes import Entry
+from .classes import Entry, YearToPage
 
 
 def extract_year(file_name):
@@ -45,6 +45,30 @@ def split_to_pages(entries, entries_per_page, entries_min_before_end, pages=None
             cnt = 0
 
     return pages
+
+
+def process_pages(pages, l_append_content, entries_to_page, years_to_page, p_num, t):
+    for page in pages:
+        l_append_content(t.page.render(entries=page, page_class=get_page_class(p_num)))
+
+        # entries to page
+        for entry in [entry for entry in page if not entry.is_year]:
+            (last_name, first_name, middle_name) = entry.val.split()[:3]
+            entries_to_page.append([
+                last_name,
+                first_name,
+                middle_name,
+                entry.year,
+                p_num
+            ])
+
+        # years to page
+        for year in [entry.val for entry in page if entry.is_year]:
+            years_to_page.append(YearToPage(year, p_num))
+
+        p_num += 1
+
+    return p_num
 
 
 def generate_names_mapping(entries_to_page, json_file):

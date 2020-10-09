@@ -36,3 +36,17 @@ class Templates:
         self.front = env.get_template('front_page.html')
         self.page = env.get_template('page.html')
         self.sep = env.get_template('sep_page.html')
+
+
+class Content:
+    def __init__(self):
+        self.content = ''
+
+    def append(self, content):
+        self.content += content
+
+    def __str__(self):
+        return self.content
+
+    def __repr__(self):
+        return 'Content (len: {})'.format(len(self.content))
