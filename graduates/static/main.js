@@ -142,7 +142,7 @@ searchInput.on('input', () => {
         if (searchResult.length > 0) {
             searchResult.forEach(it => createSearchEntry(it[3], `${it[0]} ${it[1]} ${it[2]}`, it[4]));
         } else {
-            createSearchEntry('перейти на 1-ую страницу', 'Ничего не найдено', 1);
+            createSearchEntry('перейти на 1-ую страницу', 'Ничего не найдено', 2);
         }
         updateSearchLinksEvents();
     } else {
