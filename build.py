@@ -88,7 +88,8 @@ info['short_sha'] = os.getenv('CI_COMMIT_SHORT_SHA', '')
 
 html = t.index.render(page_title=PAGE_TITLE, content=content, s_years=s_years, m_years=m_years, info=info)
 
-print(html)  # todo: save html directly in folder
+with open('index.html', 'w', encoding='utf8') as f:
+    f.write(html)
 
 with open('names_mapping.json', 'w', encoding='utf8') as f:
     generate_names_mapping(search_data, f)
