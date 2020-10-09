@@ -159,6 +159,6 @@ info "Create build/static dir"
 mkdir build/static
 
 info "copy files:"
-cp graduates/static/* build/static -v
+cp graduates/static/* build/static -vr
 
 header "Done"
