@@ -26,7 +26,7 @@ p_num += 1
 content += t.first.render(page_class=get_page_class(p_num))
 p_num += 1
 
-content += t.front.render(title=TITLE, subtitle=SUBTITLE)
+content += t.front.render(title=TITLE, subtitle=SUBTITLE, page_class=get_page_class(p_num))
 p_num += 1
 
 # used for year to page mapping
