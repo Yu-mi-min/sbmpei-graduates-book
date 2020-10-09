@@ -17,7 +17,7 @@ MAST_DIR = 'graduates/text/masters'
 t = Templates()
 
 content = ''
-content += t.first.render(title=TITLE, subtitle=SUBTITLE)
+content += t.front.render(title=TITLE, subtitle=SUBTITLE)
 
 # used for year to page mapping
 s_years = []

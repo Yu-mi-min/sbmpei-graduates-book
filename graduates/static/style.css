@@ -13,12 +13,12 @@ body {
     box-shadow: 0 0.5em 1.2em -0.125em rgba(10,10,10,.6);
 }
 
-.first-page {
+.front-page {
     width: 100%;
     height: 100%;
 }
 
-.first-page .page-content {
+.front-page .page-content {
     margin: 10rem 1rem;
 }
 

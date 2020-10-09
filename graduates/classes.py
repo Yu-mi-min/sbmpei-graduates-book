@@ -32,6 +32,6 @@ class Templates:
     def __init__(self):
         env = Environment(loader=PackageLoader('graduates', 'templates'))
         self.index = env.get_template('index.html')
-        self.first = env.get_template('first_page.html')
+        self.front = env.get_template('front_page.html')
         self.page = env.get_template('page.html')
         self.sep = env.get_template('sep_page.html')
