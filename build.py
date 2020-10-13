@@ -12,6 +12,7 @@ TITLE = 'Дипломы с отличием получили'
 SUBTITLE = 'филиал ФГБОУ ВО «Национальный исследовательский университет «МЭИ» в г.&nbsp;Смоленске'
 
 SPEC_DIR = 'graduates/text/specialists'
+BACH_DIR = 'graduates/text/bachelors'
 MAST_DIR = 'graduates/text/masters'
 
 t = Templates()
@@ -31,6 +32,7 @@ p_num += 1
 
 # used for year to page mapping
 s_years = []
+b_years = []
 m_years = []
 
 # used for search
@@ -38,9 +40,15 @@ search_data = list()
 
 # parse all entries
 s_pages = split_to_pages(extract_entries(SPEC_DIR), ENTRIES_PER_PAGE, ENTRIES_MIN_BEFORE_END)
+b_pages = split_to_pages(extract_entries(BACH_DIR), ENTRIES_PER_PAGE, ENTRIES_MIN_BEFORE_END)
 m_pages = split_to_pages(extract_entries(MAST_DIR), ENTRIES_PER_PAGE, ENTRIES_MIN_BEFORE_END)
 
 p_num = process_pages(s_pages, content.append, search_data, s_years, p_num, t)
+
+content.append(t.sep.render(title='БАКАЛАВРЫ', page_class=get_page_class(p_num)))
+p_num += 1
+
+p_num = process_pages(b_pages, content.append, search_data, b_years, p_num, t)
 
 content.append(t.sep.render(title='МАГИСТРЫ', page_class=get_page_class(p_num)))
 p_num += 1
@@ -53,7 +61,13 @@ if p_num % 2 == 1:
 info = dict()
 info['short_sha'] = os.getenv('CI_COMMIT_SHORT_SHA', '')
 
-html = t.index.render(page_title=PAGE_TITLE, content=str(content), s_years=s_years, m_years=m_years, info=info)
+html = t.index.render(
+    page_title=PAGE_TITLE,
+    content=str(content),
+    s_years=s_years,
+    b_years=b_years,
+    m_years=m_years,
+    info=info)
 
 with open('index.html', 'w', encoding='utf8') as f:
     f.write(html)
