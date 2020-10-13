@@ -57,6 +57,23 @@
       </div>
     </div>
 
+    <div id="dd-bach" class="dropdown control">
+      <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-bach">
+          <span>Бакалавр</span>
+          <span class="icon is-small"><i class="fas fa-angle-down" aria-hidden="true"></i></span>
+        </button>
+      </div>
+
+      <div class="dropdown-menu" id="dropdown-menu-mast" role="menu">
+        <div class="dropdown-content">
+          {%- for y in b_years %}
+            <a class="dropdown-item to-page" to-page="{{ y.page }}">{{ y.year }}</a>
+          {%- endfor %}
+        </div>
+      </div>
+    </div>
+
     <div id="dd-mast" class="dropdown control">
       <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-mast">

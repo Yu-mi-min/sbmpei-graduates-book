@@ -1,6 +1,7 @@
 let book = $('#book');
 let ddSpec = $('#dd-spec');
 let ddMast = $('#dd-mast');
+let ddBach = $('#dd-bach');
 let ddLinks = $('.to-page');
 let ddSearch = $('#dd-search');
 let searchInput = $('#search-input');
@@ -19,6 +20,7 @@ toPage = (page) => book.turn('page', page)
 hideDDContents = () => {
     deactivate(ddSpec);
     deactivate(ddMast);
+    deactivate(ddBach);
     deactivate(ddSearch);
 }
 
@@ -88,6 +90,7 @@ $(document).keydown(e => {
 
 ddSpec.click(() => toggle(ddSpec))
 ddMast.click(() => toggle(ddMast))
+ddBach.click(() => toggle(ddBach))
 
 ddLinks.click(e => {
     e.stopPropagation();
