@@ -49,6 +49,7 @@ body {
     list-style-type: none;
     text-align: left;
     display: inline-block;
+    cursor:default;
 }
 
 .page ul li {
@@ -59,9 +60,35 @@ body {
     color: #aa1515;
 }
 
-.page ul li span {
+.entry {
+    position: relative;
+    height: 1.75rem;
+    display: inline-block;
+
+    white-space: nowrap;
+}
+
+.entry .num {
     float: left;
     width: 1.6rem;
+}
+
+.entry .text {
+
+}
+
+.entry .subtext {
+    color: #746b65;
+    font-size: small;
+    font-style: italic;
+    position: absolute;
+    top: 1rem;
+    left: 2.5rem;
+    opacity: 50%;
+}
+
+.entry:hover .subtext {
+    opacity: 100%;
 }
 
 #dd-spec .dropdown-content {

@@ -3,7 +3,7 @@ import os
 from graduates.classes import Templates, YearToPage, Content
 from graduates.utils import extract_entries, split_to_pages, generate_names_mapping, get_page_class, process_pages
 
-ENTRIES_PER_PAGE = 35
+ENTRIES_PER_PAGE = 30
 ENTRIES_MIN_BEFORE_END = 2
 
 PAGE_TITLE = 'Дипломы с отличием получили'

@@ -5,7 +5,17 @@
                 {% if entry.is_year %}
                     <li class="year">{{ entry }}</li>
                 {%- else %}
-                    <li><span>{{ entry.num }}. </span>{{ entry }}</li>
+                    <li>
+                        <div class="entry">
+                            <div class="num">{{ entry.num }}.</div>
+                            <div class="text">{{ entry.text }}</div>
+                            <div class="subtext">
+                                {%- if entry.subtext -%}
+                                    {{ "– " ~ entry.subtext }}
+                                {%- endif -%}
+                            </div>
+                        </div>
+                    </li>
                 {%- endif %}
             {%- endfor %}
         </ul>

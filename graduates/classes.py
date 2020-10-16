@@ -12,20 +12,21 @@ class YearToPage:
 
 
 class Entry:
-    def __init__(self, val, num=0, year=None, is_year=False):
+    def __init__(self, year, num=0, text="", subtext="", is_year=False):
         self.is_year = is_year
-        self.val = val
         self.num = num
+        self.text = text
+        self.subtext = subtext
         self.year = year
 
     def __str__(self):
-        return str(self.val)
+        return self.__repr__()
 
     def __repr__(self):
         if self.is_year:
-            return str(self.val)
+            return str(self.year)
         else:
-            return '{} {} ({})'.format(self.num, self.val, self.year)
+            return '{} {} - {} ({})'.format(self.num, self.text, self.subtext, self.year)
 
 
 class Templates:

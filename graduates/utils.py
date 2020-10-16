@@ -18,7 +18,8 @@ def extract_entries(directory, entries=None):
         entries.append(Entry(year, is_year=True))
         num = 1
         for line in file:
-            entries.append(Entry(line.strip(), num=num, year=year))
+            (text, subtext) = (line.strip().split('\u2013') + [''])[:2]
+            entries.append(Entry(year, num, text, subtext))
             num += 1
 
     return entries
@@ -53,7 +54,7 @@ def process_pages(pages, l_append_content, entries_to_page, years_to_page, p_num
 
         # entries to page
         for entry in [entry for entry in page if not entry.is_year]:
-            (last_name, first_name, middle_name) = entry.val.split()[:3]
+            (last_name, first_name, middle_name) = entry.text.split()[:3]
             entries_to_page.append([
                 last_name,
                 first_name,
@@ -63,7 +64,7 @@ def process_pages(pages, l_append_content, entries_to_page, years_to_page, p_num
             ])
 
         # years to page
-        for year in [entry.val for entry in page if entry.is_year]:
+        for year in [entry.year for entry in page if entry.is_year]:
             years_to_page.append(YearToPage(year, p_num))
 
         p_num += 1
