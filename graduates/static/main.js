@@ -35,20 +35,28 @@ modalSmallScreenClose = () => deactivate(modalSmallScreen);
 hideLoader = () => setTimeout(() => deactivate($('#loader')), 555);
 
 search = (query, searchData) => {
-    let params = query.split(/[^А-Яа-я]+/).slice(0, 3);
+    let params = query.toLowerCase()
+        .replace(/ё/, 'е')
+        .split(/[^А-Яа-яЁё]+/)
+        .slice(0, 3);
 
     let result = searchData;
 
-    let doFilter = (paramNum, arg) => result = result.filter(it => RegExp(`^${arg}.*$`).test(it[paramNum].toLowerCase()));
+    let doFilter = (paramNum, arg) => {
+        result = result
+        .filter(it => RegExp(`^${arg}.*$`).test(
+            it[paramNum].toLowerCase().replace(/ё/, 'е')
+        ));
+    };
 
     let ln = params.shift();
-    if (ln && result) doFilter(0, ln.toLowerCase());
+    if (ln && result) doFilter(0, ln);
 
     let fn = params.shift();
-    if (fn && result) doFilter(1, fn.toLowerCase());
+    if (fn && result) doFilter(1, fn);
 
     let mn = params.shift();
-    if (mn && result) doFilter(2, mn.toLowerCase());
+    if (mn && result) doFilter(2, mn);
 
     return result.sort().slice(0, 20);
 }
@@ -137,7 +145,7 @@ searchInput.on('input', () => {
     let query = searchInput.val();
     clearSearchContent();
 
-    if (query.replace(/[^А-Яа-я]/g, '').length > 2) {
+    if (query.replace(/[^А-Яа-яЁё]/g, '').length > 2) {
         activate(ddSearch);
         console.log('process query: ' + query);
         let searchResult = search(query, searchData);
